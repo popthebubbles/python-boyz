@@ -4,6 +4,7 @@ import view
 import controller
 import thread
 import socket
+import pyglet
 
 ip = 'localhost'
 port = 8888
@@ -16,6 +17,8 @@ view = view.View()
 
 #controller takes the socket as input so it can communicate w/ server
 controller = controller.Controller(s)
+
+window = pyglet.window.Window()
 
 
 
