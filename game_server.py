@@ -1,3 +1,7 @@
+#has to read input from clients, update model, refresh the view
+#UDP vs TCP?
+#I'm a casual so I'm feeling TCP, if anyone wants to implement it with UDP be my guest
+
 import socket
 import sys
 from thread import *
@@ -24,15 +28,12 @@ print 'Socket now listening'
 
 #Function for handling connections
 def clientthread(conn):
-    #Sending message to connected client
-    conn.send('Welcome to the server. Type something and hit enter\n')
     
     #infinite loop so that function does not terminate and threads do not end
     while True:
         
         #Receiving from client
         data = conn.recv(1024)
-        reply = 'OK...' + data
         if not data:
             break
         
