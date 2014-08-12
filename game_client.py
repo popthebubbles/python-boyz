@@ -5,6 +5,7 @@ import controller
 import thread
 import socket
 import pyglet
+import game_model
 
 ip = 'localhost'
 port = 8888
@@ -15,8 +16,13 @@ s.connect((ip, port))
 #Make the view and controller
 view = view.View()
 
-#controller takes the socket as input so it can communicate w/ server
-controller = controller.Controller(s)
+model = game_model.Model()
+
+
+
+#controller takes the socket and view as inputs
+
+controller = controller.Controller(s, view, model)
 
 window = pyglet.window.Window()
 

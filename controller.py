@@ -1,9 +1,11 @@
 
 class controller:
 
-    def __init__(self, s):
-		pass
-
+    def __init__(self, s, view, model):
+        self.s = self
+        self.view = view
+        self.model = model
+    
 	# 20 x 20 grid, 40x40 size boxes, 67 3 buttons 3/3
     def mouse_click_dispatch(self, x, y):
         if(x > 800 and x < 1100 and y > 534 and y < 800):
@@ -28,7 +30,13 @@ class controller:
         self.select(counterx, countery)
 
     def update_view():
-        pass
+        if self.model.selected = None:
+            self.view.display_grid.turn_off_all()
+        else:
+            self.view.display_grid.highlight_valid_moves(self.model.path(self.model.selected))
+
+        self.view.display_grid.update()
+        self.view.profile.update()
 
     def update_server():
         pass

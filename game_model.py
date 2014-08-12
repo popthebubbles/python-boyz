@@ -1,5 +1,12 @@
 #Establishes the game model: classes for map, units, combat
 
+import test_map
+
+class Model:
+    def __init__(self):
+        test_map.loadMap(self)
+        self.selected = None
+
 class Unit_Grid:
     def __init__(self,x,y):
         self.x = x

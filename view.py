@@ -1,7 +1,7 @@
-
-class view:
-    pass
-
+class View:
+    def __init__(self, model):
+        self.display_grid = Display_Grid(model.x, model.y, model.unit_grid)
+        self.profile = Profile()
 
 class Display_Grid:
 
@@ -49,3 +49,9 @@ class Square:
 
     def turn_on_light(self):
         highlit = True
+
+class Profile:
+    def __init__(self):
+        pass
+    def update(self):
+        pass

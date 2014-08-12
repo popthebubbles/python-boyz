@@ -1,14 +1,11 @@
-from Game_Model import *
+def loadMap(model):
 
-unit_grid = Unit_Grid(20, 20)
-map = Map(20, 20)
+    model.x = 20
+    model.y = 20
 
-map.auto_complete()
+    model.unit_grid = Unit_Grid(20, 20)
+    model.map = Map(20, 20)
 
-unit = Unit()
-unit.move = 3
+    model.map.auto_complete()
 
-unit_grid.place_unit(9, 9, unit)
 
-x = path(unit_grid, map, unit)
-print x
