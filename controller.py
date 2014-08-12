@@ -38,17 +38,16 @@ class controller:
         self.view.display_grid.update()
         self.view.profile.update()
 
-    def update_server():
-        pass
-
-    def update_model():
-        pass
+    #needs implementing
+    def update_server(msg, x1, y1, x2, y2):
+        s.send(msg + ' ' + x1 + ' ' + y1 + ' ' + x2 + ' ' + y2)
 
     def players_turn():
         pass
 
     def select(self, x, y):
-        pass
+        self.model.selected = self.model.unit_grid[x][y]
+        self.update_view()
 
     def move():
         pass
