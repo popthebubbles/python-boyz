@@ -13,13 +13,13 @@ def loadMap(model):
 
 
     thief = game_model.Unit()
-    thief.map_sprite_link = "Thief.png"
+    thief.map_sprite_link = "Archer.png"
     thief1 = game_model.Unit()
-    thief1.map_sprite_link = "Thief.png"
+    thief1.map_sprite_link = "Archer.png"
     thief2 = game_model.Unit()
-    thief2.map_sprite_link = "Thief.png"
+    thief2.map_sprite_link = "Archer.png"
     thief3 = game_model.Unit()
-    thief3.map_sprite_link = "Thief.png"
+    thief3.map_sprite_link = "Archer.png"
 
     model.unit_grid.place_unit(5,5,thief)
     model.unit_grid.place_unit(5,6,thief1)
