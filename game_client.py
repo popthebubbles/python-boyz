@@ -27,11 +27,16 @@ con = controller.Controller(s, view, model)
 window = pyglet.window.Window(1100,800)
 image = pyglet.resource.image(model.map.img)
 
+@window.event
+def on_mouse_release(x, y, button, modifiers):
+    con.mouse_click_dispatch(x,y)
 
 @window.event
 def on_draw():
     window.clear()
+    
     image.blit(0,0)
+    
     view.display()
 
 pyglet.app.run()

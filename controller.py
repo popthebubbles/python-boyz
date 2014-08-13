@@ -8,13 +8,17 @@ class Controller:
     
 	# 20 x 20 grid, 40x40 size boxes, 67 3 buttons 3/3
     def mouse_click_dispatch(self, x, y):
+        
+        print 'Click at:', x, y
+        
         if(x > 800 and x < 1100 and y > 534 and y < 800):
             boiz = 534
             countery = 0
             while boiz < y:
                 boiz +=67
                 countery +=1
-        
+            
+            print "Output", countery
             self.action(countery)
         else:
            boiz = 40
@@ -27,9 +31,11 @@ class Controller:
            while boiz < y:
                boiz += 40
                countery += 1
-        self.select(counterx, countery)
+            
+           print "Output:", counterx, countery
+           self.select(counterx, countery)
 
-    def update_view():
+    def update_view(self):
         if self.model.selected == None:
             self.view.display_grid.turn_off_all()
         else:
@@ -46,7 +52,7 @@ class Controller:
         pass
 
     def select(self, x, y):
-        self.model.selected = self.model.unit_grid[x][y]
+        self.model.selected = self.model.unit_grid.grid[x][y]
         self.update_view()
 
     def move():

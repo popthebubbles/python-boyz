@@ -32,12 +32,12 @@ class Display_Grid:
         unit_grid = self.unit_grid
         for i in range(unit_grid.x):
             for j in range(unit_grid.y):
-                if unit_grid[x][y] == None:
-                    self.grid[x][y].occupied = False
-                    self.grid[x][y].unitimg = None
+                if unit_grid.grid[i][j] == None:
+                    self.grid[i][j].occupied = False
+                    self.grid[i][j].unitimg = None
                 else:
-                    self.grid[x][y].occupied = True
-                    self.grid[x][y].unitimg = unit_grid[x][y].map_sprite_link
+                    self.grid[i][j].occupied = True
+                    self.grid[i][j].unitimg = unit_grid.grid[i][j].map_sprite_link
 
     def turn_off_all(self):
         for i in range(self.x):
