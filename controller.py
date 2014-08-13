@@ -5,6 +5,7 @@ class Controller:
         self.s = self
         self.view = view
         self.model = model
+        self.action = False
     
 	# 20 x 20 grid, 40x40 size boxes, 67 3 buttons 3/3
     def mouse_click_dispatch(self, x, y):
@@ -53,7 +54,17 @@ class Controller:
         pass
 
     def select(self, x, y):
-        self.model.selected = self.model.unit_grid.grid[x][y]
+        #if an action has been selected
+        if self.action:
+            if self.action == 1:
+                self.action = False
+                self.attack(x,y)
+            if self.action == 2:
+                self.action = False
+                self.move(x,y)
+        else:
+            self.model.selected = self.model.unit_grid.grid[x][y]
+        
         self.update_view()
 
     def move():
