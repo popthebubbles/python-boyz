@@ -11,25 +11,26 @@ class Controller:
         
         print 'Click at:', x, y
         
-        if(x > 800 and x < 1100 and y > 534 and y < 800):
-            boiz = 534
-            countery = 0
-            while boiz < y:
-                boiz +=67
-                countery +=1
+        if(x > 800 and x < 1100):
+            if(y > 534 and y < 800):
+                increment = 534
+                countery = 0
+                while increment < y:
+                    increment +=67
+                    countery +=1
             
-            print "Output", countery
-            self.action(countery)
+                print "Output", countery
+                self.action(countery)
         else:
-           boiz = 40
+           increment = 40
            counterx = 0
-           while boiz < x:
-               boiz += 40
+           while increment < x:
+               increment += 40
                counterx += 1
-           boiz = 40
+           increment = 40
            countery = 0
-           while boiz < y:
-               boiz += 40
+           while increment < y:
+               increment += 40
                countery += 1
             
            print "Output:", counterx, countery
