@@ -23,6 +23,7 @@ view = view.View(model)
 #controller takes the socket and view as inputs
 
 con = controller.Controller(s, view, model)
+con.action = 2
 
 window = pyglet.window.Window(1100,800)
 image = pyglet.resource.image(model.map.img)

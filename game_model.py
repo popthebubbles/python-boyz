@@ -7,6 +7,73 @@ class Model:
         test_map.loadMap(self)
         self.selected = None
 
+#returns a list of x,y tuples, the valid squares you can move
+    def path(self, grid, map, unit):
+        model = []
+        x = unit.x
+        y = unit.y
+        for i in range(map.x):
+            model.append([])
+            for j in range(map.y):
+                model[i].append(True)
+    
+        start = (unit.x, unit.y, unit.move)
+        valid_moves = []
+    
+        #hot fix
+        grid.grid[unit.x][unit.y] = None
+        model[unit.x][unit.y] = False
+    
+        queue = [start]
+    
+        while queue:
+        
+            temp = queue.pop(0)
+        
+            #check to see if the square is empty
+            if grid.grid[temp[0]][temp[1]] == None:
+                #check terrain
+                if not map.map[temp[0]][temp[1]].mov_effect == 'no':
+                    #square is valid, add it to list of valid moves
+                    valid_moves.append( (temp[0], temp[1]) )
+                
+                    #now we check for other possible moves
+                    #if you have moves add more possible squares
+                    if temp[2] > 0:
+                        if (not map.map[temp[0]][temp[1]] == 'up') and temp[0] - 1 >= 0:
+                            if model[temp[0] - 1][temp[1]]:
+                                queue.append( (temp[0] - 1, temp[1], temp[2] - 1))
+                                model[ temp[0] - 1][ temp[1] ] = False
+                    
+                        if (not map.map[temp[0]][temp[1]] == 'down') and temp[0] + 1 < map.x:
+                            if model[temp[0] + 1][temp[1]]:
+                                queue.append( (temp[0] + 1, temp[1], temp[2] - 1))
+                                model[ temp[0] + 1][ temp[1] ] = False
+                    
+                    
+                        if (not map.map[temp[0]][temp[1]] == 'left') and temp[1] - 1 >= 0:
+                            if model[temp[0]][temp[1] - 1]:
+                                queue.append( (temp[0], temp[1] - 1, temp[2] - 1))
+                                model[ temp[0] ][ temp[1] - 1 ] = False
+                    
+                        if (not map.map[temp[0]][temp[1]] == 'right') and temp[1] + 1 < map.y:
+                            if model[temp[0]][temp[1] + 1]:
+                                queue.append( (temp[0], temp[1] + 1, temp[2] - 1))
+                                model[ temp[0] ][ temp[1] + 1 ] = False
+    
+    
+    
+        # hot fix
+        grid.grid[unit.x][unit.y] = unit
+    
+        return valid_moves
+
+
+
+
+
+
+
 class Unit_Grid:
     def __init__(self,x,y):
         self.x = x
@@ -20,8 +87,8 @@ class Unit_Grid:
     def place_unit(self, x, y, unit):
         if self.grid[x][y] == None:
             self.grid[x][y] = unit
-            unit.x_pos = x
-            unit.y_pos = y
+            unit.x = x
+            unit.y = y
         else:
             print('Invalid unit placement')
 
@@ -73,8 +140,8 @@ class Unit:
     def __init__(self):
         self.map_sprite_link = None
         self.portraint_sprite_link = None
-        self.x_pos = None
-        self.y_pos = None
+        self.x = None
+        self.y = None
         self.hp = None
         self.strength = None
         self.speed = None
@@ -82,69 +149,5 @@ class Unit:
         self.crit_chance = None
         self.armor = None
         self.move = None
-
-
-#returns a list of x,y tuples, the valid squares you can move
-def path(grid, map, unit):
-    model = []
-    x = unit.x_pos
-    y = unit.y_pos
-    for i in range(map.x):
-        model.append([])
-        for j in range(map.y):
-            model[i].append(True)
-
-    start = (unit.x_pos, unit.y_pos, unit.move)
-    valid_moves = []
-
-    #hot fix
-    grid.grid[unit.x_pos][unit.y_pos] = None
-    model[unit.x_pos][unit.y_pos] = False
-
-    queue = [start]
-
-    while queue:
-
-        temp = queue.pop(0)
-        
-        #check to see if the square is empty
-        if grid.grid[temp[0]][temp[1]] == None:
-            #check terrain
-            if not map.map[temp[0]][temp[1]].mov_effect == 'no':
-                #square is valid, add it to list of valid moves
-                valid_moves.append(temp)
-
-                #now we check for other possible moves
-                #if you have moves add more possible squares
-                if temp[2] > 0:
-                    if (not map.map[temp[0]][temp[1]] == 'up') and temp[0] - 1 > 0:
-                        if model[temp[0] - 1][temp[1]]:
-                            queue.append( (temp[0] - 1, temp[1], temp[2] - 1))
-                            model[ temp[0] - 1][ temp[1] ] = False
-                    
-                    if (not map.map[temp[0]][temp[1]] == 'down') and temp[0] + 1 < map.x:
-                        if model[temp[0] + 1][temp[1]]:
-                            queue.append( (temp[0] + 1, temp[1], temp[2] - 1))
-                            model[ temp[0] + 1][ temp[1] ] = False
-                
-
-                    if (not map.map[temp[0]][temp[1]] == 'left') and temp[1] - 1 > 0:
-                        if model[temp[0]][temp[1] - 1]:
-                            queue.append( (temp[0], temp[1] - 1, temp[2] - 1))
-                            model[ temp[0] ][ temp[1] - 1 ] = False
-
-                    if (not map.map[temp[0]][temp[1]] == 'right') and temp[1] + 1 < map.y:
-                        if model[temp[0]][temp[1] + 1]:
-                            queue.append( (temp[0], temp[1] + 1, temp[2] - 1))
-                            model[ temp[0] ][ temp[1] + 1 ] = False
-
-
-
-    # hot fix
-    grid.grid[unit.x_pos][unit.y_pos] = unit
-
-    return valid_moves
-
-
 
 

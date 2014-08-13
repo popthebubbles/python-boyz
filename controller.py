@@ -10,7 +10,7 @@ class Controller:
 	# 20 x 20 grid, 40x40 size boxes, 67 3 buttons 3/3
     def mouse_click_dispatch(self, x, y):
         
-        print 'Click at:', x, y
+        #print 'Click at:', x, y
         
         if(x > 800 and x < 1100):
             if(y > 534 and y < 800):
@@ -22,7 +22,7 @@ class Controller:
             
                 print "Output", countery
                 self.action(countery)
-        else:
+        elif x < 800 and x > 0 and y < 800 and y > 0:
            increment = 40
            counterx = 0
            while increment < x:
@@ -39,11 +39,10 @@ class Controller:
 
     def update_view(self):
         if self.model.selected == None:
-            self.view.display_grid.turn_off_all()
+            self.view.grid.turn_off_all()
         else:
-            self.view.display_grid.highlight_valid_moves(self.model.path(self.model.selected))
-
-        self.view.display_grid.update()
+            self.view.grid.highlight_valid_moves(self.model.path(self.model.unit_grid, self.model.map, self.model.selected))
+        self.view.grid.update()
         self.view.profile.update()
 
     #needs implementing
@@ -54,21 +53,31 @@ class Controller:
         pass
 
     def select(self, x, y):
+        
+        print('selected')
         #if an action has been selected
-        if self.action:
+        if self.action and self.model.selected:
             if self.action == 1:
-                self.action = False
+                #self.action = False
                 self.attack(x,y)
             if self.action == 2:
-                self.action = False
-                self.move(x,y)
+                #self.action = False
+                self.move(x,y,self.model.selected)
         else:
             self.model.selected = self.model.unit_grid.grid[x][y]
         
         self.update_view()
 
-    def move():
-        pass
+    def move(self, x, y, unit):
+        
+        moves = self.model.path(self.model.unit_grid, self.model.map, unit)
+        print(moves)
+
+        if (x,y) in moves:
+            self.model.unit_grid.mov_unit(unit, unit.x, unit.y, x, y)
+            self.update_view()
+
+        self.model.selected = None
 
     def attack():
         pass
