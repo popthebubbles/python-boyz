@@ -1,7 +1,19 @@
+import pyglet
+
 class View:
     def __init__(self, model):
+        self.x = model.x
+        self.y = model.y
+        self.model = model
         self.display_grid = Display_Grid(model.x, model.y, model.unit_grid)
         self.profile = Profile()
+
+    def display(self):
+        for x in range(self.x):
+            for y in range(self.y):
+                if self.model.unit_grid.grid[x][y]:
+                    img = pyglet.resource.image(self.model.unit_grid.grid[x][y].map_sprite_link)
+                    img.blit( 40 * x, 40 * y)
 
 class Display_Grid:
 
@@ -16,7 +28,7 @@ class Display_Grid:
                 grid[i].append(Square())
         self.grid = grid
 
-    def update(self)
+    def update(self):
         unit_grid = self.unit_grid
         for i in range(unit_grid.x):
             for j in range(unit_grid.y):

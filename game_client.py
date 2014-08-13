@@ -7,26 +7,34 @@ import socket
 import pyglet
 import game_model
 
-ip = 'localhost'
-port = 8888
+#ip = 'localhost'
+#port = 8888
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((ip, port))
+#s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#s.connect((ip, port))
+s=0
 
 #Make the view and controller
-view = view.View()
 
 model = game_model.Model()
-
+view = view.View(model)
 
 
 #controller takes the socket and view as inputs
 
-controller = controller.Controller(s, view, model)
+con = controller.Controller(s, view, model)
 
-window = pyglet.window.Window()
+window = pyglet.window.Window(1100,800)
+image = pyglet.resource.image(model.map.img)
 
 
+@window.event
+def on_draw():
+    window.clear()
+    image.blit(0,0)
+    view.display()
+
+pyglet.app.run()
 
 
-s.close()
+#s.close()

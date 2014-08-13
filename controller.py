@@ -1,5 +1,5 @@
 
-class controller:
+class Controller:
 
     def __init__(self, s, view, model):
         self.s = self
@@ -30,7 +30,7 @@ class controller:
         self.select(counterx, countery)
 
     def update_view():
-        if self.model.selected = None:
+        if self.model.selected == None:
             self.view.display_grid.turn_off_all()
         else:
             self.view.display_grid.highlight_valid_moves(self.model.path(self.model.selected))
