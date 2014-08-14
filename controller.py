@@ -22,7 +22,7 @@ class Controller:
                     countery +=1
             
                 print "Output", countery
-                self.action(countery)
+                self.menu_click(countery)
         elif x < 800 and x > 0 and y < 800 and y > 0:
            increment = 40
            counterx = 0
@@ -45,7 +45,7 @@ class Controller:
             if not self.model.selected.moved:
                 self.view.grid.highlight_valid_moves(self.model.path(self.model.unit_grid, self.model.map, self.model.selected))
         self.view.grid.update()
-        self.view.profile.update()
+        self.view.profile.update(self.model.selected)
 
     #needs implementing
     def update_server(msg, x1, y1, x2, y2):
@@ -75,7 +75,7 @@ class Controller:
     def move(self, x, y, unit):
         
         moves = self.model.path(self.model.unit_grid, self.model.map, unit)
-        print(moves)
+        #print(moves)
 
         if (x,y) in moves and not unit.moved:
             self.model.unit_grid.mov_unit(unit, unit.x, unit.y, x, y)
@@ -103,5 +103,5 @@ class Controller:
         #idk, Nathan is handling server communication
         pass
     
-    def action(self, num):
+    def menu_click(self, num):
         pass

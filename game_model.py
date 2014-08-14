@@ -139,13 +139,15 @@ class Unit:
         self.portraint_sprite_link = None
         self.x = None
         self.y = None
-        self.hp = None
-        self.strength = None
-        self.speed = None
-        self.dexterity = None
-        self.crit_chance = None
-        self.armor = None
-        self.move = None
+        self.stats = {}
+        self.stats['hp'] = None
+        self.stats['strength'] = None
+        self.stats['speed'] = None
+        self.stats['dexterity'] = None
+        self.stats['crit_chance'] = None
+        self.stats['armor'] = None
+        self.stats['move'] = None
+        self.move = None #for backwards compatibility... fix this later?
         self.moved = False
         self.team = None
 

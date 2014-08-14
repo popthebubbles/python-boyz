@@ -16,6 +16,14 @@ def loadMap(model):
     thief.map_sprite_link = "Dragon.png"
     thief.move = 7
     thief.team = 1
+    thief.stats['move'] = 7
+    thief.stats['hp'] = 50
+    thief.stats['strength'] = 10
+    thief.stats['speed'] = 60
+    thief.stats['dexterity'] = 60
+    thief.stats['crit_chance'] = 30
+    thief.stats['armor'] = 10
+    
     thief1 = game_model.Unit()
     thief1.map_sprite_link = "Dragon.png"
     thief1.move = 7
