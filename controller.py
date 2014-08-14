@@ -14,7 +14,7 @@ class Controller:
         #print 'Click at:', x, y
         
         if(x > 800 and x < 1100):
-            if(y > 0 and y < 534):
+            if(y > 0 and y < int(800/3)):
                 increment = 534
                 countery = 1
                 while increment < y:
@@ -22,7 +22,7 @@ class Controller:
                     countery +=1
                 
                 print "Output", countery
-                self.action(countery)
+                self.menu_click(countery)
         elif x < 800 and x > 0 and y < 800 and y > 0:
            increment = 40
            counterx = 0
