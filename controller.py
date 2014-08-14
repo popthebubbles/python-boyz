@@ -15,9 +15,9 @@ class Controller:
         
         if(x > 800 and x < 1100):
             if(y > 0 and y < int(800/3)):
-                increment = 534
+                increment = int(800/3)
                 countery = 1
-                while increment < y:
+                while increment > y:
                     increment -=67
                     countery +=1
                 
