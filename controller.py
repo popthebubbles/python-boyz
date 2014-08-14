@@ -58,10 +58,10 @@ class Controller:
         #if an action has been selected
         if self.action and self.model.selected:
             if self.action == 1:
-                #self.action = False
+                self.action = False
                 self.attack(x,y)
             if self.action == 2:
-                #self.action = False
+                self.action = False
                 self.move(x,y,self.model.selected)
         else:
             if self.model.unit_grid.grid[x][y]:
@@ -104,4 +104,4 @@ class Controller:
         pass
     
     def menu_click(self, num):
-        pass
+        self.action = num
