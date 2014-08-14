@@ -1,11 +1,12 @@
 
 class Controller:
 
-    def __init__(self, s, view, model):
+    def __init__(self, s, view, model, team):
         self.s = self
         self.view = view
         self.model = model
         self.action = False
+        self.team = team
     
 	# 20 x 20 grid, 40x40 size boxes, 67 3 buttons 3/3
     def mouse_click_dispatch(self, x, y):
@@ -41,7 +42,8 @@ class Controller:
         if self.model.selected == None:
             self.view.grid.turn_off_all()
         else:
-            self.view.grid.highlight_valid_moves(self.model.path(self.model.unit_grid, self.model.map, self.model.selected))
+            if not self.model.selected.moved:
+                self.view.grid.highlight_valid_moves(self.model.path(self.model.unit_grid, self.model.map, self.model.selected))
         self.view.grid.update()
         self.view.profile.update()
 
@@ -53,8 +55,6 @@ class Controller:
         pass
 
     def select(self, x, y):
-        
-        print('selected')
         #if an action has been selected
         if self.action and self.model.selected:
             if self.action == 1:
@@ -64,8 +64,12 @@ class Controller:
                 #self.action = False
                 self.move(x,y,self.model.selected)
         else:
-            self.model.selected = self.model.unit_grid.grid[x][y]
-        
+            if self.model.unit_grid.grid[x][y]:
+                if self.model.unit_grid.grid[x][y].team == self.team:
+                    self.model.selected = self.model.unit_grid.grid[x][y]
+            else:
+                self.model.selected = None
+
         self.update_view()
 
     def move(self, x, y, unit):
@@ -73,25 +77,30 @@ class Controller:
         moves = self.model.path(self.model.unit_grid, self.model.map, unit)
         print(moves)
 
-        if (x,y) in moves:
+        if (x,y) in moves and not unit.moved:
             self.model.unit_grid.mov_unit(unit, unit.x, unit.y, x, y)
             self.update_view()
+            unit.moved = True
 
         self.model.selected = None
 
     def attack():
+        #apply combat formula based on stats
         pass
 
     def battle():
         pass
 
     def kill():
+        #remove from player grid, delete unit
         pass
 
     def trigger():
+        #leave unimplemented for version 1.0
         pass
 
     def recv_move():
+        #idk, Nathan is handling server communication
         pass
     
     def action(self, num):

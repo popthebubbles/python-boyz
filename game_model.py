@@ -6,7 +6,10 @@ class Model:
     def __init__(self):
         test_map.loadMap(self)
         self.selected = None
-
+    #        self.player_turn = None
+        self.player_turn = 1 #comment out this line later
+    
+    
 #returns a list of x,y tuples, the valid squares you can move
     def path(self, grid, map, unit):
         model = []
@@ -67,12 +70,6 @@ class Model:
         grid.grid[unit.x][unit.y] = unit
     
         return valid_moves
-
-
-
-
-
-
 
 class Unit_Grid:
     def __init__(self,x,y):
@@ -149,5 +146,7 @@ class Unit:
         self.crit_chance = None
         self.armor = None
         self.move = None
+        self.moved = False
+        self.team = None
 
 
