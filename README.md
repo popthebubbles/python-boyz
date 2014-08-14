@@ -8,4 +8,3 @@ Server-Client Interaction
 
 Combat System: how does it actually work?
 
-Profile: We need some images
