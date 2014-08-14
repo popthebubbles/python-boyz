@@ -7,6 +7,7 @@ class Controller:
         self.model = model
         self.action = False
         self.team = team
+        self.turn = False
     
 	# 20 x 20 grid, 40x40 size boxes, 67 3 buttons 3/3
     def mouse_click_dispatch(self, x, y):
@@ -104,4 +105,12 @@ class Controller:
         pass
     
     def menu_click(self, num):
-        self.action = num
+        if self.turn:
+            if num == 4:
+                self.end_turn()
+            else:
+                self.action = num
+
+
+    def end_turn(self):
+        self.turn = False

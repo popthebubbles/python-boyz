@@ -29,6 +29,7 @@ image = pyglet.resource.image(model.map.img)
 
 @window.event
 def on_mouse_release(x, y, button, modifiers):
+    #needs to get lock before dispatching, handle here
     con.mouse_click_dispatch(x,y)
 
 @window.event
@@ -43,3 +44,21 @@ pyglet.app.run()
 
 
 #s.close()
+
+
+
+#waitforturn()
+#new thread
+
+#rec_move()
+#receives an opponents action from the server
+#when received, gets lock
+#changes board, frees lock
+
+
+#sendmove()
+
+#getteam()
+
+#Please do this Nathan. 
+
