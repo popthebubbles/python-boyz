@@ -147,6 +147,7 @@ class Unit:
         self.stats['crit_chance'] = None
         self.stats['armor'] = None
         self.stats['move'] = None
+        self.controller = None
         self.move = None #for backwards compatibility... fix this later?
         self.moved = False
         self.team = None

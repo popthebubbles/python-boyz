@@ -139,14 +139,23 @@ class Unit_Info:
         self.stat_bars.append(Stat_Bar(800, 513, 'move', 'Move: '))
     
     
-    
+        #Display Team info
+        self.team_label = pyglet.text.Label('', font_name='Times New Roman', font_size=12, x=900, y = 543)
+        
+        
     def update(self, unit):
         for stat_bar in self.stat_bars:
             stat_bar.update(unit)
 
+        if unit:
+            self.team_label.text = unit.controller
+        else:
+            self.team_label.text = ''
+
     def display(self):
         for stat_bar in self.stat_bars:
             stat_bar.display()
+        self.team_label.draw()
 
 class Stat_Bar:
     def __init__(self, x, y, type, msg):

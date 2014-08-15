@@ -9,6 +9,7 @@ import game_model
 
 #ip = 'localhost'
 #port = 8888
+player = "Popthebubbles"
 
 #s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 #s.connect((ip, port))
@@ -22,7 +23,8 @@ view = view.View(model)
 
 #controller takes the socket and view as inputs
 
-con = controller.Controller(s, view, model, 1)
+con = controller.Controller(s, view, model, 1, player)
+con.start_turn()
 
 window = pyglet.window.Window(1100,800)
 image = pyglet.resource.image(model.map.img)
@@ -60,5 +62,5 @@ pyglet.app.run()
 
 #getteam()
 
-#Please do this Nathan. 
+#Please do this Nathan.
 

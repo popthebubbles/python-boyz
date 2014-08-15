@@ -1,7 +1,7 @@
 
 class Controller:
 
-    def __init__(self, s, view, model, team):
+    def __init__(self, s, view, model, team, player):
         self.s = self
         self.view = view
         self.model = model
@@ -9,6 +9,16 @@ class Controller:
         self.team = team
         self.turn = False
     
+    
+        for i in range(model.x):
+            for j in range(model.y):
+                temp = self.model.unit_grid.grid[i][j]
+                if temp:
+                    if temp.team == team:
+                        temp.controller = player
+                    else:
+                        temp.controller = "Enemy Unit"
+
 	# 20 x 20 grid, 40x40 size boxes, 67 3 buttons 3/3
     def mouse_click_dispatch(self, x, y):
         
@@ -43,7 +53,7 @@ class Controller:
         if self.model.selected == None:
             self.view.grid.turn_off_all()
         else:
-            if not self.model.selected.moved:
+            if (not self.model.selected.moved) and self.model.selected.team == self.team:
                 self.view.grid.highlight_valid_moves(self.model.path(self.model.unit_grid, self.model.map, self.model.selected))
         self.view.grid.update()
         self.view.profile.update(self.model.selected)
@@ -66,8 +76,7 @@ class Controller:
                 self.move(x,y,self.model.selected)
         else:
             if self.model.unit_grid.grid[x][y]:
-                if self.model.unit_grid.grid[x][y].team == self.team:
-                    self.model.selected = self.model.unit_grid.grid[x][y]
+                self.model.selected = self.model.unit_grid.grid[x][y]
             else:
                 self.model.selected = None
 
@@ -109,8 +118,18 @@ class Controller:
             if num == 4:
                 self.end_turn()
             else:
-                self.action = num
+                if self.model.selected.team == self.team:
+                    self.action = num
 
 
     def end_turn(self):
         self.turn = False
+
+    def start_turn(self):
+        for i in range(self.model.x):
+            for j in range(self.model.y):
+                if self.model.unit_grid.grid[i][j]:
+                    if self.model.unit_grid.grid[i][j].team == self.team:
+                        self.model.unit_grid.grid[i][j].moved = False
+
+        self.turn = True
